@@ -11,15 +11,17 @@ height = 250 # or auto without parameter
 x = 12
 y = 50
 imagelist = glob.glob('capturas/*.png')
-header = 'Oscar Enrique Estrada García - Práctica 2 - Curso Propedéutico para el Diplomado en Ciencia de Datos - 18.06.2022'
+header = input('Escribe el encabezado: ')
 
 pdf = FPDF(orientation, units, format)
 # imagelist is the list with all image filenames
 for image in imagelist:
     pdf.add_page()
     pdf.set_author(author)
-    pdf.set_font('Arial','B',12)
+    pdf.set_font('Arial','',11)
     width_header = pdf.get_string_width(header) + 6 
-    pdf.cell(width_header, 9, header, 0, 0, 'C')
+    pdf.cell(width_header, 9, f'{header}\n', 0, 1, 'C')
+    pdf.cell(450,30,f'{image}',0,0,'C')
     pdf.image(image, x,y,width)
+    
 pdf.output(f'{file_name}.pdf', "F")
